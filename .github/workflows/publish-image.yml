@@ -21,7 +21,7 @@ jobs:
         id: get_channel
         shell: bash
         run: |
-          if [[ "$GITHUB_REF" == 'refs/heads/master' ]]; then
+          if [[ "$GITHUB_REF" == 'refs/heads/main' ]]; then
             echo ::set-output name=channel::"latest"
             echo ::set-output name=version::${GITHUB_REF/refs\/heads\//}-${GITHUB_SHA::6}
           elif [[ "$GITHUB_REF" == "refs/heads/"* ]]; then
