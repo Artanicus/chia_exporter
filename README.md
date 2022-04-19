@@ -4,10 +4,12 @@
 [Chia](https://chia.net) nodes, using the local [RPC
 API](https://github.com/Chia-Network/chia-blockchain/wiki/RPC-Interfaces)
 
+The canonical maintained fork based on the work done originally by @retzkek
+
 ## Quick Install
 
 1. Get the latest tarball for your platform from the [release
-   page](https://github.com/retzkek/chia_exporter/releases)
+   page](https://github.com/artanicus/chia_exporter/releases)
 
 2. Extract the tarball, move the `chia_exporter` binary to `/usr/bin` and move
    the `chia-exporter@.service` unit file to `/etc/systemd/system`.

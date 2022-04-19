@@ -1,4 +1,4 @@
-module github.com/retzkek/chia_exporter
+module github.com/artanicus/chia_exporter
 
 go 1.14
 

@@ -76,7 +76,7 @@ func main() {
 		fmt.Fprintf(w, "chia_exporter version %s\n", Version)
 		fmt.Fprintf(w, "metrics are published on /metrics\n\n")
 		fmt.Fprintf(w, "This program is free software released under the GNU AGPL.\n")
-		fmt.Fprintf(w, "The source code is availabe at https://github.com/retzkek/chia_exporter\n")
+		fmt.Fprintf(w, "The source code is availabe at https://github.com/artanicus/chia_exporter\n")
 	})
 	http.Handle("/metrics", promhttp.Handler())
 
