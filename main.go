@@ -468,7 +468,7 @@ func (cc ChiaCollector) collectPlots(ch chan<- prometheus.Metric) {
 	}
 	ch <- prometheus.MustNewConstMetric(
 		prometheus.NewDesc(
-			"chia_plots_failed_to_open",
+			"chia_harvester_plots_failed_to_open",
 			"Number of plots files failed to open.",
 			nil, nil,
 		),
@@ -477,22 +477,38 @@ func (cc ChiaCollector) collectPlots(ch chan<- prometheus.Metric) {
 	)
 	ch <- prometheus.MustNewConstMetric(
 		prometheus.NewDesc(
-			"chia_plots_not_found",
+			"chia_harvester_plots_not_found",
 			"Number of plots files not found.",
 			nil, nil,
 		),
 		prometheus.GaugeValue,
 		float64(len(plots.NotFound)),
 	)
-	ch <- prometheus.MustNewConstMetric(
-		prometheus.NewDesc(
-			"chia_plots",
-			"Number of plots currently using.",
-			nil, nil,
-		),
-		prometheus.GaugeValue,
-		float64(len(plots.Plots)),
-	)
+	chia_plots_summary := make(map[string]map[string]int)
+	for _, p := range plots.Plots {
+		k := strconv.FormatInt(p.Size, 10)
+		if _, found := chia_plots_summary[p.PoolContract][k]; found {
+			chia_plots_summary[p.PoolContract][k] += 1
+		} else {
+			chia_plots_summary[p.PoolContract] = make(map[string]int)
+			chia_plots_summary[p.PoolContract][k] = 1
+		}
+	}
+	for contract, p := range chia_plots_summary {
+		for k, count := range p {
+			ch <- prometheus.MustNewConstMetric(
+				prometheus.NewDesc(
+					"chia_harvester_plots",
+					"Number of plots currently using by pool contract key and k size.",
+					[]string{"pool_contract_puzzle_hash", "size"}, nil,
+				),
+				prometheus.GaugeValue,
+				float64(count),
+				contract,
+				k,
+			)
+		}
+	}
 }
 
 func (cc ChiaCollector) collectFarmedAmount(ch chan<- prometheus.Metric, w Wallet) {
