@@ -153,8 +153,8 @@ chia_pool_points_acknowledged_24h{launcher_id="0x...",pool_url="https://pool.yyy
 chia_pool_points_found_24h{launcher_id="0x...",pool_url="https://pool.yyy.y"} 5
 # HELP chia_harvester_plots Number of plots currently using by pool contract key and k size.
 # TYPE chia_harvester_plots gauge
-chia_harvester_plots{k="32",pool_contract=""} 4
-chia_harvester_plots{k="32",pool_contract="0x99c899e03c67edd0078c2706d856aef593c5c4eadb2d2b3670b1485ea1ad5aa2"} 136
+chia_harvester_plots{size="32",pool_contract_puzzle_hash=""} 4
+chia_harvester_plots{size="32",pool_contract_puzzle_hash="0x..."} 136
 # HELP chia_harvester_plots_failed_to_open Number of plots files failed to open.
 # TYPE chia_harvester_plots_failed_to_open gauge
 chia_harvester_plots_failed_to_open 0
